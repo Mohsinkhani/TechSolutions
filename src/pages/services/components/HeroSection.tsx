@@ -1,154 +1,281 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import Icon from '../../../components/ui/AppIcon';
 import Button from '../../../components/ui/Button';
-// import Image from '../../../components/ui/AppImage';
+interface HeroSectionProps {
+  onNavigateToConsultation: () => void;
+}
+const HeroSection: React.FC<HeroSectionProps> = ({ onNavigateToConsultation }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-const HeroSection: React.FC = () => {
-  return (
-    <section className="relative bg-gradient-to-br from-brand-primary via-brand-secondary to-primary text-white overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-32 h-32 border border-white/20 rounded-full"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 border border-white/20 rounded-full"></div>
-        <div className="absolute bottom-20 left-1/4 w-16 h-16 border border-white/20 rounded-full"></div>
-      </div>
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2 text-conversion-accent">
-                <Icon name="Code2" size={24} />
-                <span className="text-sm font-medium uppercase tracking-wider">Web Development Excellence</span>
-              </div>
-              
-              <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-                Scalable Web Solutions That 
-                <span className="text-conversion-accent"> Drive Growth</span>
-              </h1>
-              
-              <p className="text-xl text-gray-300 leading-relaxed max-w-2xl">
-                Transform your business vision into powerful web applications that scale with your success. Our full-stack approach combines cutting-edge technology with strategic business thinking.
-              </p>
-            </div>
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-            {/* Key Benefits */}
-            <div className="grid sm:grid-cols-3 gap-6">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-success/20 rounded-lg flex items-center justify-center">
-                  <Icon name="Zap" size={20} color="rgb(16, 185, 129)" />
-                </div>
-                <div>
-                  <p className="font-semibold">Lightning Fast</p>
-                  <p className="text-sm text-gray-400">Sub-3s load times</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-conversion-accent/20 rounded-lg flex items-center justify-center">
-                  <Icon name="Shield" size={20} color="rgb(0, 212, 255)" />
-                </div>
-                <div>
-                  <p className="font-semibold">Enterprise Security</p>
-                  <p className="text-sm text-gray-400">Bank-grade protection</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-warning/20 rounded-lg flex items-center justify-center">
-                  <Icon name="TrendingUp" size={20} color="rgb(217, 119, 6)" />
-                </div>
-                <div>
-                  <p className="font-semibold">Infinite Scale</p>
-                  <p className="text-sm text-gray-400">Grows with you</p>
-                </div>
-              </div>
-            </div>
+    // Set canvas dimensions
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                variant="primary"
-                size="lg"
-                iconName="Calendar"
-                iconPosition="left"
-                className="bg-conversion-accent hover:bg-cyan-500 text-white"
-              >
-                Start Your Project
-              </Button>
-              
-              <Link to="/portfolio-case-studies-transformation-stories">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  iconName="ArrowRight"
-                  iconPosition="right"
-                  className="border-white/30 text-white hover:bg-white/10"
-                >
-                  View Success Stories
-                </Button>
-              </Link>
-            </div>
-          </div>
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-          {/* Visual Element */}
-          <div className="relative">
-            <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                  </div>
-                  <span className="text-xs text-gray-400">Modern Web App</span>
-                </div>
-                
-                <div className="bg-black/30 rounded-lg p-4 font-mono text-sm">
-                  <div className="text-conversion-accent">// Full-Stack Architecture</div>
-                  <div className="text-white mt-2">
-                    <span className="text-purple-300">const</span> <span className="text-blue-300">webApp</span> = {"{"}
-                  </div>
-                  <div className="text-white ml-4">
-                    <span className="text-green-300">frontend</span>: <span className="text-yellow-300">'React + Next.js'</span>,
-                  </div>
-                  <div className="text-white ml-4">
-                    <span className="text-green-300">backend</span>: <span className="text-yellow-300">'Node.js + Express'</span>,
-                  </div>
-                  <div className="text-white ml-4">
-                    <span className="text-green-300">database</span>: <span className="text-yellow-300">'PostgreSQL'</span>,
-                  </div>
-                  <div className="text-white ml-4">
-                    <span className="text-green-300">cloud</span>: <span className="text-yellow-300">'AWS/Azure'</span>
-                  </div>
-                  <div className="text-white">{"}"}</div>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-4 mt-6">
-                  <div className="bg-success/20 rounded-lg p-3 text-center">
-                    <div className="text-2xl font-bold text-success">99.9%</div>
-                    <div className="text-xs text-gray-300">Uptime</div>
-                  </div>
-                  <div className="bg-conversion-accent/20 rounded-lg p-3 text-center">
-                    <div className="text-2xl font-bold text-conversion-accent">2.1s</div>
-                    <div className="text-xs text-gray-300">Load Time</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+    // Particle system
+    const particles: any[] = [];
+    const particleCount = 150;
+    const connectionDistance = 150;
+
+    // Create particles
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.5 + 0.5,
+        speedX: (Math.random() - 0.5) * 0.5,
+        speedY: (Math.random() - 0.5) * 0.5,
+        color: `rgba(100, 200, 255, ${Math.random() * 0.5 + 0.1})`,
+      });
+    }
+
+    // Animation loop
+    let animationFrameId: number;
+    const animate = () => {
+      if (ctx) {
+        // Create gradient background
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        gradient.addColorStop(0, 'rgba(15, 23, 42, 0.8)'); // Navy
+        gradient.addColorStop(0.5, 'rgba(30, 41, 59, 0.6)'); // Dark blue
+        gradient.addColorStop(1, 'rgba(15, 23, 42, 0.8)'); // Navy
+        
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Update and draw particles
+        particles.forEach((p) => {
+          p.x += p.speedX;
+          p.y += p.speedY;
+          
+          // Boundary checks
+          if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+          
+          // Draw particle
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+        });
+
+        // Draw connections between particles
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
             
-            {/* Floating Elements */}
-            <div className="absolute -top-4 -right-4 w-16 h-16 bg-conversion-accent/20 rounded-full flex items-center justify-center floating-animation">
-              <Icon name="Rocket" size={24} color="rgb(0, 212, 255)" />
-            </div>
-            <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-success/20 rounded-full flex items-center justify-center floating-animation animation-delay-1000">
-              <Icon name="CheckCircle" size={20} color="rgb(16, 185, 129)" />
-            </div>
-          </div>
-        </div>
+            if (distance < connectionDistance) {
+              const opacity = 1 - distance / connectionDistance;
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(100, 200, 255, ${opacity * 0.2})`;
+              ctx.lineWidth = 0.5;
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+      }
+      
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', resizeCanvas);
+    };
+  }, []);
+
+  // Animation variants for text
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
+  return (
+    <section className="relative text-white overflow-hidden h-screen flex items-center">
+      {/* Canvas background */}
+      <canvas 
+        ref={canvasRef} 
+        className="absolute top-0 left-0 w-full h-full z-0"
+      />
+      
+      {/* Animated gradient overlay */}
+      <div className="absolute inset-0 z-1 bg-gradient-to-br from-transparent via-blue-900/10 to-transparent animate-gradient-pan">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(100,200,255,0.05)_0%,rgba(0,0,0,0)_70%)]"></div>
       </div>
+      
+      {/* Floating spheres */}
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-cyan-500/10 blur-3xl animate-float"></div>
+      <div className="absolute bottom-1/3 right-1/4 w-48 h-48 rounded-full bg-blue-500/10 blur-3xl animate-float animation-delay-2000"></div>
+      <div className="absolute top-1/3 right-1/3 w-32 h-32 rounded-full bg-purple-500/10 blur-3xl animate-float animation-delay-4000"></div>
+      
+      {/* Shining stars */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {[...Array(25)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white rounded-full opacity-70 animate-pulse"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDuration: `${3 + Math.random() * 2}s`,
+              animationDelay: `${Math.random() * 1.5}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Main Content */}
+      <motion.div 
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center"
+        variants={container}
+        initial="hidden"
+        animate="show"
+      >
+        <motion.h1 
+          className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4"
+          variants={item}
+          transition={{ duration: 0.8 }}
+        >
+          We Build <motion.span 
+            className="text-cyan-400"
+            animate={{ 
+              textShadow: ["0 0 5px rgba(56,189,248,0)", "0 0 15px rgba(56,189,248,0.5)", "0 0 5px rgba(56,189,248,0)"]
+            }}
+            transition={{ 
+              duration: 2, 
+              repeat: Infinity, 
+              repeatType: "reverse" 
+            }}
+          >Web</motion.span>, <motion.span 
+            className="text-blue-400"
+            animate={{ 
+              textShadow: ["0 0 5px rgba(96,165,250,0)", "0 0 15px rgba(96,165,250,0.5)", "0 0 5px rgba(96,165,250,0)"]
+            }}
+            transition={{ 
+              duration: 2, 
+              repeat: Infinity, 
+              repeatType: "reverse",
+              delay: 0.3
+            }}
+          >Apps</motion.span> & <motion.span 
+            className="text-purple-400"
+            animate={{ 
+              textShadow: ["0 0 5px rgba(192,132,252,0)", "0 0 15px rgba(192,132,252,0.5)", "0 0 5px rgba(192,132,252,0)"]
+            }}
+            transition={{ 
+              duration: 2, 
+              repeat: Infinity, 
+              repeatType: "reverse",
+              delay: 0.6
+            }}
+          >Digital Solutions</motion.span>
+        </motion.h1>
+
+        <motion.p 
+          className="mt-6 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto"
+          variants={item}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          From websites and mobile apps to e-commerce and digital marketing — we turn ideas into scalable solutions.
+        </motion.p>
+
+       <motion.div 
+  className="mt-10"
+  variants={item}
+  transition={{ duration: 0.8, delay: 0.4 }}
+>
+   <Button
+      variant="primary"
+      size="lg"
+      className="relative overflow-hidden group bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white px-8 py-4 rounded-lg shadow-lg transition-all duration-300"
+      onClick={onNavigateToConsultation}
+    >
+      <span className="relative z-10">Get Started</span>
+      <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+      <span className="absolute top-0 left-0 w-full h-0.5 bg-white animate-button-line"></span>
+    </Button>
+</motion.div>
+      </motion.div>
+      
+      {/* Floating elements */}
+      <motion.div 
+        className="absolute bottom-20 left-10 w-10 h-10 rounded-full bg-cyan-400/20 shadow-lg"
+        animate={{ 
+          y: [0, -20, 0],
+        }}
+        transition={{ 
+          duration: 4, 
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div 
+        className="absolute top-1/3 right-20 w-6 h-6 rounded-full bg-purple-400/20 shadow-lg"
+        animate={{ 
+          y: [0, -15, 0],
+        }}
+        transition={{ 
+          duration: 5, 
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 0.5
+        }}
+      />
+      <motion.div 
+        className="absolute top-20 right-1/4 w-8 h-8 rounded-full bg-blue-400/20 shadow-lg"
+        animate={{ 
+          y: [0, -25, 0],
+        }}
+        transition={{ 
+          duration: 6, 
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+      />
+      
+      {/* Scroll indicator */}
+      <motion.div 
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity }}
+      >
+        <span className="text-sm text-gray-400 mb-2">Scroll down</span>
+        <div className="w-1 h-8 bg-gray-400 rounded-full">
+          <motion.div 
+            className="w-1 h-4 bg-white rounded-full"
+            animate={{ y: [0, 10] }}
+            transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
+          />
+        </div>
+      </motion.div>
     </section>
   );
 };

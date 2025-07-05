@@ -59,7 +59,7 @@ const DigitalMarketingHighlight: React.FC<DigitalMarketingHighlightProps> = ({ o
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
             Complete Digital Marketing Team
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">
-              For Just 1,499 ﷼/Month
+              For Just 1,499 SAR/Month
             </span>
           </h2>
           

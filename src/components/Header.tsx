@@ -64,14 +64,16 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
               </button>
               
               <div className="relative group">
-                <button 
-                  className="text-gray-700 hover:text-teal-600 px-3 py-2 text-sm font-medium flex items-center transition-colors"
-                  onMouseEnter={() => setActiveDropdown('software')}
-                  onMouseLeave={() => setActiveDropdown(null)}
-                >
-                  Software Development
-                  <ChevronDown className="w-4 h-4 ml-1" />
-                </button>
+             <div className="relative group">
+  <button
+    className="text-gray-700 hover:text-teal-600 px-3 py-2 text-sm font-medium flex items-center transition-colors"
+    onClick={() => handleNavClick('software-development')}
+    // Remove onMouseEnter/onMouseLeave for click navigation
+  >
+    Our Services
+    {/* <ChevronDown className="w-4 h-4 ml-1" /> */}
+  </button>
+</div>
                 <div 
                   className={`absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-lg transition-all duration-200 ${
                     activeDropdown === 'software' ? 'opacity-100 visible' : 'opacity-0 invisible'
@@ -203,14 +205,14 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
                 onClick={() => handleNavClick('software-development')}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-gray-50 rounded-md"
               >
-                Software Development
+                Our Services
               </button>
-              <button 
+              {/* <button 
                 onClick={() => handleNavClick('ecommerce-development')}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-gray-50 rounded-md"
               >
                 Ecommerce Development
-              </button>
+              </button> */}
               <button 
                 onClick={() => handleNavClick('portfolio')}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-gray-50 rounded-md"

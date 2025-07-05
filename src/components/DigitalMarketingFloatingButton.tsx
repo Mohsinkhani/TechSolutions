@@ -32,10 +32,10 @@ const DigitalMarketingFloatingButton: React.FC<DigitalMarketingFloatingButtonPro
     setIsVisible(false);
     localStorage.setItem('hasSeenFloatingButton', 'true');
     onNavigateToConsultation();
-    
-    // Navigate to consultation form
+
+    // Scroll to intake form by ID or fallback to h2
     setTimeout(() => {
-      const formSection = document.querySelector('[data-section="consultation-form"]');
+      const formSection = document.getElementById('sectionform');
       if (formSection) {
         formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {

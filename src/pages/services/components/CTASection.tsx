@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../../../components/ui/AppIcon';
 import Button from '../../../components/ui/Button';
- 
+
 interface NextStep {
   step: string;
   title: string;
@@ -26,251 +26,272 @@ interface Guarantee {
   icon: string;
 }
 
+const guarantees: Guarantee[] = [
+  {
+    title: "On-Time Delivery",
+    description: "We guarantee your project will be delivered on schedule, every time.",
+    icon: "Clock"
+  },
+  {
+    title: "Satisfaction Promise",
+    description: "Not happy? We'll work until you are, or your money back.",
+    icon: "Smile"
+  },
+  {
+    title: "Transparent Pricing",
+    description: "No hidden fees, ever. You get clear, upfront pricing.",
+    icon: "DollarSign"
+  }
+];
+
+const contactOptions: ContactOption[] = [
+  {
+    title: "Book a Free Consultation",
+    description: "Schedule a 1:1 strategy session with our experts to discuss your goals.",
+    action: "Book Now",
+    icon: "Calendar",
+    primary: true,
+    link: "/consultation-gateway-strategic-planning-portal"
+  },
+  {
+    title: "Request a Quote",
+    description: "Get a detailed, no-obligation quote tailored to your project.",
+    action: "Get Quote",
+    icon: "FileText",
+    primary: false,
+    link: "/request-quote"
+  },
+  {
+    title: "Contact Support",
+    description: "Have questions? Our team is here to help you every step of the way.",
+    action: "Contact Us",
+    icon: "MessageCircle",
+    primary: false,
+    link: "/contact"
+  }
+];
+
+const nextSteps: NextStep[] = [
+  {
+    step: "1",
+    title: "Discovery Call",
+    description: "We learn about your business, goals, and challenges to tailor our approach.",
+    duration: "30 min",
+    icon: "Phone"
+  },
+  {
+    step: "2",
+    title: "Strategy & Proposal",
+    description: "Receive a custom strategy and transparent proposal for your project.",
+    duration: "1-2 days",
+    icon: "ClipboardList"
+  },
+  {
+    step: "3",
+    title: "Kickoff & Delivery",
+    description: "We execute, iterate, and deliver your solution with ongoing support.",
+    duration: "2-6 weeks",
+    icon: "Rocket"
+  }
+];
+
 const CTASection: React.FC = () => {
-  const nextSteps: NextStep[] = [
-    {
-      step: "1",
-      title: "Discovery Call",
-      description: "30-minute consultation to understand your goals and requirements",
-      duration: "30 minutes",
-      icon: "Phone"
-    },
-    {
-      step: "2",
-      title: "Project Proposal",
-      description: "Detailed technical proposal with timeline and investment breakdown",
-      duration: "2-3 days",
-      icon: "FileText"
-    },
-    {
-      step: "3",
-      title: "Development Kickoff",
-      description: "Project initiation with team introductions and milestone planning",
-      duration: "1 week",
-      icon: "Rocket"
-    }
-  ];
-
-  const contactOptions: ContactOption[] = [
-    {
-      title: "Schedule Consultation",
-      description: "Book a strategic planning session with our technical experts",
-      action: "Book Now",
-      icon: "Calendar",
-      primary: true,
-      link: "/consultation-gateway-strategic-planning-portal"
-    },
-    {
-      title: "View Our Work",
-      description: "Explore detailed case studies and transformation stories",
-      action: "See Portfolio",
-      icon: "ExternalLink",
-      primary: false,
-      link: "/portfolio-case-studies-transformation-stories"
-    },
-    {
-      title: "Technical Discussion",
-      description: "Connect directly with our development team for technical questions",
-      action: "Contact Team",
-      icon: "MessageSquare",
-      primary: false,
-      link: "/about-team-expertise-company-culture"
-    }
-  ];
-
-  const guarantees: Guarantee[] = [
-    {
-      title: "No-Risk Consultation",
-      description: "Free initial consultation with no obligations",
-      icon: "Shield"
-    },
-    {
-      title: "Transparent Pricing",
-      description: "Clear project estimates with no hidden costs",
-      icon: "DollarSign"
-    },
-    {
-      title: "Quality Guarantee",
-      description: "100% satisfaction or we'll make it right",
-      icon: "CheckCircle"
-    }
-  ];
-
   return (
-    <section className="py-20 bg-gradient-to-br from-brand-primary via-brand-secondary to-primary text-white relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-32 h-32 border border-white/20 rounded-full"></div>
-        <div className="absolute top-1/3 right-20 w-24 h-24 border border-white/20 rounded-full"></div>
-        <div className="absolute bottom-20 left-1/4 w-16 h-16 border border-white/20 rounded-full"></div>
-        <div className="absolute bottom-10 right-10 w-20 h-20 border border-white/20 rounded-full"></div>
+    <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-950 to-black py-24 text-white">
+      {/* Enhanced Background */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-cyan-500/20 blur-3xl"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-48 h-48 rounded-full bg-blue-500/20 blur-3xl"></div>
+        <div className="absolute top-1/3 right-1/3 w-32 h-32 rounded-full bg-violet-500/20 blur-3xl"></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main CTA */}
-        <div className="text-center mb-16">
-          <div className="flex items-center justify-center space-x-2 text-conversion-accent mb-4">
-            <Icon name="Zap" size={24} />
-            <span className="text-sm font-medium uppercase tracking-wider">Ready to Transform?</span>
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Main CTA - Enhanced */}
+        <div className="mb-20 text-center">
+          <div className="mb-5 flex items-center justify-center space-x-2 text-cyan-400">
+            <div className="animate-pulse rounded-full bg-cyan-400/20 p-1.5">
+              <Icon name="Zap" size={20} />
+            </div>
+            <span className="text-sm font-semibold uppercase tracking-wider">
+              Ready to Transform?
+            </span>
           </div>
-          
-          <h2 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight">
-            Turn Your Vision Into
-            <span className="text-conversion-accent"> Digital Reality</span>
+          <h2 className="mx-auto mb-6 max-w-3xl text-4xl font-bold leading-tight lg:text-5xl">
+            Turn Your Vision Into <br />
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-300 bg-clip-text text-transparent">
+              Digital Reality
+            </span>
           </h2>
-          
-          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="mx-auto mb-10 max-w-2xl text-xl leading-relaxed text-gray-300">
             Join hundreds of successful businesses who've transformed their operations with our 
-            strategic web development solutions. Your competitive advantage starts here.
+            strategic web solutions. Your competitive advantage starts now.
           </p>
-
-          {/* Primary CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <div className="mb-16 flex flex-col justify-center gap-4 sm:flex-row">
             <Link to="/consultation-gateway-strategic-planning-portal">
               <Button
                 variant="primary"
-                size="xl"
-                iconName="Calendar"
+                // iconName="Calendar"
                 iconPosition="left"
-                className="bg-conversion-accent hover:bg-cyan-500 text-white shadow-lg"
+                className="group bg-gradient-to-r from-cyan-600 to-blue-500 shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl"
               >
                 Start Your Project Today
+                <span className="ml-2 inline-block transition-transform group-hover:translate-x-1">
+                  &rarr;
+                </span>
               </Button>
             </Link>
-            
             <Link to="/portfolio-case-studies-transformation-stories">
               <Button
                 variant="outline"
-                size="xl"
-                iconName="Play"
+                // iconName="Play"
                 iconPosition="left"
-                className="border-white/30 text-white hover:bg-white/10"
+                className="border-white/30 text-white backdrop-blur-sm hover:bg-white/10"
               >
                 See Success Stories
               </Button>
             </Link>
           </div>
-
-          {/* Trust Indicators */}
-          <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-gray-300">
-            <div className="flex items-center space-x-2">
-              <Icon name="CheckCircle" size={16} className="text-success" />
-              <span>Free Consultation</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Icon name="Clock" size={16} className="text-conversion-accent" />
-              <span>Quick Response</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Icon name="Shield" size={16} className="text-warning" />
-              <span>No Obligations</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Next Steps Process */}
-        <div className="mb-16">
-          <div className="text-center mb-12">
-            <h3 className="text-2xl font-bold mb-4">Your Journey to Success</h3>
-            <p className="text-gray-300">
-              Simple, transparent process from initial consultation to project delivery
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {nextSteps.map((step, index) => (
-              <div key={index} className="relative">
-                {/* Connector Line */}
-                {index < nextSteps.length - 1 && (
-                  <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-white/20 z-0"></div>
-                )}
-                
-                <div className="relative bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 z-10">
-                  <div className="flex items-center space-x-4 mb-4">
-                    <div className="w-12 h-12 bg-conversion-accent rounded-full flex items-center justify-center font-bold text-lg">
-                      {step.step}
-                    </div>
-                    <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-                      {/* <Icon name={step.icon} size={20} color="white" /> */}
-                    </div>
-                  </div>
-                  
-                  <h4 className="text-lg font-semibold mb-2">{step.title}</h4>
-                  <p className="text-gray-300 text-sm mb-3">{step.description}</p>
-                  <div className="text-xs text-conversion-accent font-medium">{step.duration}</div>
-                </div>
+          <div className="flex flex-wrap justify-center gap-8 text-sm">
+            {[
+              { icon: "CheckCircle", text: "Free Consultation", color: "text-green-400" },
+              { icon: "Clock", text: "Quick Response", color: "text-cyan-400" },
+              { icon: "Shield", text: "No Obligations", color: "text-yellow-400" },
+              { icon: "Award", text: "Industry Experts", color: "text-purple-300" }
+            ].map((item, index) => (
+              <div key={index} className="flex items-center space-x-2">
+ 
+<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/20">
+  <Icon name="Star" size={24} className="text-cyan-400 drop-shadow" />
+</div>
+               <span>{item.text}</span>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Contact Options */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        {/* Process Section - Enhanced */}
+        <div className="mb-20">
+          <div className="mb-16 text-center">
+            <h3 className="mb-3 text-2xl font-bold">Your Success Blueprint</h3>
+            <p className="mx-auto max-w-xl text-gray-300">
+              Our proven 3-step process for digital transformation success
+            </p>
+          </div>
+          <div className="relative">
+            <div className="absolute left-16 top-12 hidden h-1 w-4/5 bg-gradient-to-r from-cyan-400/30 to-blue-400/30 md:block"></div>
+            <div className="grid gap-10 md:grid-cols-3">
+              {nextSteps.map((step, index) => (
+                <div key={index} className="relative z-10" >
+                  <div className="flex h-full flex-col rounded-xl border border-gray-700 bg-gray-800/50 p-6 backdrop-blur-sm transition-all hover:border-cyan-500/50 hover:shadow-lg">
+                    <div className="mb-5 flex items-start justify-between">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-blue-400 font-bold text-white shadow">
+                        {step.step}
+                      </div>
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10">
+<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/20">
+  <Icon name="Star" size={24} className="text-cyan-400 drop-shadow" />
+</div>                      </div>
+                    </div>
+                    <div className="mt-auto">
+                      <h4 className="mb-3 text-lg font-semibold text-white">{step.title}</h4>
+                      <p className="mb-4 text-gray-300">{step.description}</p>
+                      <div className="flex items-center text-sm font-medium text-cyan-400">
+                        <Icon name="Clock" size={14} className="mr-2" />
+                        {step.duration}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Options - Enhanced */}
+        <div className="mb-20 grid gap-6 md:grid-cols-3">
           {contactOptions.map((option, index) => (
             <Link key={index} to={option.link} className="block">
-              <div className={`h-full p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${
+              <div className={`h-full overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
                 option.primary 
-                  ? 'bg-conversion-accent border-conversion-accent text-white shadow-lg' 
-                  : 'bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20'
+                  ? 'border-cyan-500/30 bg-gradient-to-br from-cyan-600/90 to-blue-500 shadow-lg' 
+                  : 'border-gray-700 bg-gray-800/50 backdrop-blur-sm hover:border-cyan-500/30'
               }`}>
-                <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
-                  option.primary ? 'bg-white/20' : 'bg-white/10'
-                }`}>
-                  {/* <Icon name={option.icon} size={24} color="white" /> */}
-                </div>
-                
-                <h4 className="text-lg font-semibold mb-2">{option.title}</h4>
-                <p className={`text-sm mb-4 ${option.primary ? 'text-white/90' : 'text-gray-300'}`}>
-                  {option.description}
-                </p>
-                
-                <div className="flex items-center space-x-2 font-medium">
-                  <span>{option.action}</span>
-                  <Icon name="ArrowRight" size={16} />
+                <div className="p-6">
+                  <div className={`mb-4 flex h-14 w-14 items-center justify-center rounded-xl ${
+                    option.primary ? 'bg-white/20' : 'bg-gray-700/50'
+                  }`}>
+<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/20">
+  <Icon name="Star" size={24} className="text-cyan-400 drop-shadow" />
+</div>                  </div>
+                  <h4 className="mb-2 text-xl font-semibold text-white">{option.title}</h4>
+                  <p className={`mb-5 ${option.primary ? 'text-white/90' : 'text-gray-300'}`}>
+                    {option.description}
+                  </p>
+                  <div className={`flex items-center font-medium ${
+                    option.primary ? 'text-white' : 'text-cyan-400'
+                  }`}>
+                    <span>{option.action}</span>
+                    <Icon 
+                      name="ArrowRight" 
+                      size={16} 
+                      className="ml-2 transition-transform group-hover:translate-x-1" 
+                    />
+                  </div>
                 </div>
               </div>
             </Link>
           ))}
         </div>
 
-        {/* Guarantees */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold mb-4">Our Commitment to You</h3>
-            <p className="text-gray-300">
-              We stand behind our work with concrete guarantees and transparent practices
+        {/* Guarantees - Enhanced */}
+        <div className="mb-16 rounded-2xl border border-gray-700 bg-gradient-to-br from-gray-800/50 to-gray-900/30 p-8 backdrop-blur-lg">
+          <div className="mb-12 text-center">
+            <h3 className="mb-3 text-2xl font-bold text-white">Our Ironclad Promises</h3>
+            <p className="mx-auto max-w-xl text-gray-300">
+              We stand behind our work with concrete commitments to your success
             </p>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid gap-8 md:grid-cols-3">
             {guarantees.map((guarantee, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  {/* <Icon name={guarantee.icon} size={24} color="white" /> */}
-                </div>
-                <h4 className="font-semibold mb-2">{guarantee.title}</h4>
-                <p className="text-sm text-gray-300">{guarantee.description}</p>
+                <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-cyan-600 to-blue-500">
+<div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/20">
+  <Icon name="Star" size={24} className="text-cyan-400 drop-shadow" />
+</div>                </div>
+                <h4 className="mb-3 text-lg font-semibold text-white">{guarantee.title}</h4>
+                <p className="text-gray-300">{guarantee.description}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Final CTA */}
-        <div className="text-center mt-16">
-          <p className="text-gray-300 mb-6">
-            Ready to join the ranks of successful businesses we've transformed?
-          </p>
+        <div className="text-center">
+          <div className="mx-auto mb-8 max-w-xl">
+            <h3 className="mb-4 text-3xl font-bold text-white">
+              Ready to Transform Your Business?
+            </h3>
+            <p className="text-lg text-gray-300">
+              Let's build something extraordinary together
+            </p>
+          </div>
           <Link to="/consultation-gateway-strategic-planning-portal">
             <Button
               variant="primary"
               size="xl"
-              iconName="Rocket"
+              // iconName="Rocket"
               iconPosition="left"
-              className="bg-conversion-accent hover:bg-cyan-500 text-white shadow-xl"
+              className="group bg-gradient-to-r from-cyan-600 to-blue-500 py-5 text-lg shadow-xl transition-all hover:-translate-y-0.5 hover:shadow-2xl"
             >
-              Let's Build Something Amazing
+              Launch Your Project Now
+              <span className="ml-3 inline-block transition-transform group-hover:translate-x-2">
+                &rarr;
+              </span>
             </Button>
           </Link>
+          <p className="mt-8 text-gray-400">
+            No obligations • 100% risk-free • Confidential consultation
+          </p>
         </div>
       </div>
     </section>

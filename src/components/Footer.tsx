@@ -1,27 +1,39 @@
 import React from 'react';
 import { Zap, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram, ArrowUp } from 'lucide-react';
 
-const Footer = () => {
+interface FooterProps {
+  onNavigateToPortfolio: (filter: string | null) => void;
+  onNavigateToAbout: () => void;
+  onNavigateToCaseStudy?: () => void;
+  onNavigateToContact?: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({
+  onNavigateToPortfolio,
+  onNavigateToAbout,
+  onNavigateToCaseStudy,
+  onNavigateToContact
+}) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const footerLinks = {
     services: [
-      'Web Development',
-      'Mobile App Development',
-      'E-commerce Development',
-      'Digital Marketing',
-      'UI/UX Design',
-      'Custom Software'
+      { label: 'Web Development', filter: 'Web Designs' },
+      { label: 'Mobile App Development', filter: 'Apps / Softwares' },
+      { label: 'E-commerce Development', filter: 'E-commerce' },
+      { label: 'Digital Marketing', filter: 'Digital Marketing' },
+      { label: 'UI/UX Design', filter: 'UI/UX' },
+      { label: 'Custom Software', filter: 'Custom Software' }
     ],
     company: [
-      'About Us',
-      'Our Team',
-      'Careers',
-      'Case Studies',
-      'Blog',
-      'Contact Us'
+      { label: 'About Us', action: onNavigateToAbout },
+      { label: 'Our Team' },
+      { label: 'Careers' },
+      { label: 'Case Studies', action: onNavigateToCaseStudy },
+      { label: 'Blog' },
+      { label: 'Contact Us', action: onNavigateToContact }
     ],
     resources: [
       'Documentation',
@@ -56,7 +68,6 @@ const Footer = () => {
             <p className="text-gray-400 mb-6 leading-relaxed">
               Transforming businesses through innovative digital solutions. We specialize in web development, mobile apps, and digital marketing strategies that drive growth.
             </p>
-            
             {/* Contact Info */}
             <div className="space-y-3">
               <div className="flex items-center text-gray-400">
@@ -80,9 +91,13 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.services.map((service, index) => (
                 <li key={index}>
-                  <a href="#" className="text-gray-400 hover:text-teal-400 transition-colors duration-300">
-                    {service}
-                  </a>
+                  <button
+                    type="button"
+                    className="text-gray-400 hover:text-teal-400 transition-colors duration-300 bg-transparent border-none p-0 m-0 cursor-pointer"
+                    onClick={() => onNavigateToPortfolio(service.filter)}
+                  >
+                    {service.label}
+                  </button>
                 </li>
               ))}
             </ul>
@@ -94,9 +109,17 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((item, index) => (
                 <li key={index}>
-                  <a href="#" className="text-gray-400 hover:text-teal-400 transition-colors duration-300">
-                    {item}
-                  </a>
+                  {item.action ? (
+                    <button
+                      type="button"
+                      className="text-gray-400 hover:text-teal-400 transition-colors duration-300 bg-transparent border-none p-0 m-0 cursor-pointer"
+                      onClick={item.action}
+                    >
+                      {item.label}
+                    </button>
+                  ) : (
+                    <span className="text-gray-400">{item.label}</span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -147,7 +170,6 @@ const Footer = () => {
             <div className="text-gray-400 text-sm mb-4 md:mb-0">
               © 2024 TechSolutions. All rights reserved.
             </div>
-            
             {/* Social Links */}
             <div className="flex items-center space-x-4">
               {socialLinks.map((social, index) => (

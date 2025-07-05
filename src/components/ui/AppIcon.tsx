@@ -30,16 +30,26 @@ function Icon({
             String(IconComponent).includes('return React.createElement')
         )
     ) {
-        return <HelpCircle size={size} color="gray" strokeWidth={strokeWidth} className={className} {...props} />;
+        return (
+            <span>
+                <HelpCircle size={size} color="gray" strokeWidth={strokeWidth} className={className} {...props} />
+                <span className="sr-only">{name}</span>
+            </span>
+        );
     }
 
-    return React.createElement(IconComponent as React.FC<any>, {
-        size,
-        color,
-        strokeWidth,
-        className,
-        ...props
-    });
+    return (
+        <span>
+            {React.createElement(IconComponent as React.FC<any>, {
+                size,
+                color,
+                strokeWidth,
+                className,
+                ...props
+            })}
+            <span className="sr-only">{name}</span>
+        </span>
+    );
 }
 
 export default Icon;

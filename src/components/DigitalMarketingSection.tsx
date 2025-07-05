@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
 import { Zap, Search, Palette, Edit, Video, Check, ArrowRight } from 'lucide-react';
+interface DigitalMarketingSectionProps {
+  onNavigateToConsultation: () => void;
+}
 
-const DigitalMarketingSection = () => {
+const DigitalMarketingSection: React.FC<DigitalMarketingSectionProps> = ({ onNavigateToConsultation }) => {
   const [activeDemo, setActiveDemo] = useState('seo-expert');
+
+  const handleHireNow = () => {
+    onNavigateToConsultation();
+    setTimeout(() => {
+      const formSection = document.getElementById('sectionform');
+      if (formSection) {
+        formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 200);
+  };
 
   const services = [
     {
@@ -238,10 +251,13 @@ const DigitalMarketingSection = () => {
 
             {/* CTA */}
             <div className="text-center">
-              <button className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-300 flex items-center justify-center mx-auto">
-                Hire Our Team
-                <ArrowRight size={20} className="ml-2" />
-              </button>
+              <button
+  className="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-3 rounded-full font-semibold transition-colors duration-300 flex items-center justify-center mx-auto"
+  onClick={handleHireNow}
+>
+  Hire Our Team
+  <ArrowRight size={20} className="ml-2" />
+</button>
             </div>
           </div>
         </div>

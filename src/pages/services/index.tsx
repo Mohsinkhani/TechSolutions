@@ -31,10 +31,12 @@ const ServicesWebDevelopmentExcellence: React.FC = () => {
       </Helmet>
 
       <div className="min-h-screen bg-background">
-        <Header currentPage="services" setCurrentPage={() => {}} />
+        {/* <Header currentPage="services" setCurrentPage={() => {}} /> */}
         
         <main>
-          <HeroSection />
+          <HeroSection onNavigateToConsultation={() => {
+            // Implement navigation logic here, e.g., navigate to consultation page or open a modal
+          }} />
           <ProcessMethodology />
           <TechnologyStack />
           <CaseStudySpotlights />

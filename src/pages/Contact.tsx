@@ -21,10 +21,39 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
+    
+    try {
+      const form = e.currentTarget as HTMLFormElement;
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          service: '',
+          budget: '',
+          timeline: '',
+          message: ''
+        });
+        setTimeout(() => setIsSubmitted(false), 3000);
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      // You might want to show an error message to the user
+    }
   };
 
   const contactInfo = [
@@ -38,7 +67,7 @@ const Contact = () => {
     {
       icon: <Phone className="w-6 h-6" />,
       title: 'Call Us',
-      details: ['+966 53 566 0431', ],
+      details: ['+966 53 566 0431'],
       color: 'text-green-600',
       description: 'Speak directly with our experts'
     },
@@ -165,7 +194,6 @@ const Contact = () => {
               </div>
             ))}
           </div>
-        
         </div>
       </section>
 
@@ -186,7 +214,17 @@ const Contact = () => {
                   </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form 
+                  onSubmit={handleSubmit} 
+                  action="https://formsubmit.co/info@saudips.org" 
+                  method="POST"
+                  className="space-y-6"
+                >
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_subject" value="New Contact Form Submission" />
+                  <input type="hidden" name="_template" value="table" />
+                  {/* <input type="hidden" name="_next" value="https://yourdomain.com/thank-you" /> */}
+
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">

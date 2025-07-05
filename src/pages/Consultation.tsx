@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ConsultationHero from '../components/ConsultationHero';
 import ConsultationProcess from '../components/ConsultationProcess';
 import IntelligentIntakeForm from '../components/IntelligentIntakeForm';
@@ -27,7 +27,7 @@ const Consultation = () => {
   const handleFormSubmit = (formData: any) => {
     console.log('Consultation form submitted:', formData);
     setFormSubmitted(true);
-    
+
     // Simulate form processing
     setTimeout(() => {
       alert(`Thank you ${formData.name}! Your consultation request has been received. Our team will contact you within 24 hours to schedule your strategic planning session.`);
@@ -37,38 +37,54 @@ const Consultation = () => {
   const handleScheduleSuccess = (appointmentData: any) => {
     console.log('Appointment scheduled:', appointmentData);
     setAppointmentBooked(true);
-    
+
     // Simulate booking confirmation
     setTimeout(() => {
       alert(`Consultation confirmed! You'll receive a calendar invitation for your ${appointmentData.type} session with ${appointmentData.consultant.name} on ${appointmentData.date.formatted} at ${appointmentData.time}.`);
     }, 500);
   };
 
+  // Auto-hide formSubmitted message after 10 seconds
+  useEffect(() => {
+    if (formSubmitted) {
+      const timer = setTimeout(() => setFormSubmitted(false), 10000);
+      return () => clearTimeout(timer);
+    }
+  }, [formSubmitted]);
+
+  // Auto-hide appointmentBooked message after 10 seconds
+  useEffect(() => {
+    if (appointmentBooked) {
+      const timer = setTimeout(() => setAppointmentBooked(false), 10000);
+      return () => clearTimeout(timer);
+    }
+  }, [appointmentBooked]);
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <ConsultationHero onScheduleClick={handleScheduleClick} />
-      
+
       {/* Consultation Process */}
       <ConsultationProcess />
-      
+
       {/* Intelligent Intake Form */}
       <IntelligentIntakeForm onSubmit={handleFormSubmit} />
-      
+
       {/* Project Complexity Estimator */}
       <ProjectComplexityEstimator />
-      
+
       {/* Consultation Testimonials */}
-      <ConsultationTestimonials />
-      
+      {/* <ConsultationTestimonials /> */}
+
       {/* Scheduling Integration */}
       <div id="scheduling-section">
         <SchedulingIntegration onScheduleSuccess={handleScheduleSuccess} />
       </div>
-      
+
       {/* Alternative Engagement Options */}
-      <AlternativeEngagement />
-      
+      {/* <AlternativeEngagement /> */}
+
       {/* Success Messages */}
       {formSubmitted && (
         <div className="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg z-50">
@@ -78,7 +94,7 @@ const Consultation = () => {
           </div>
         </div>
       )}
-      
+
       {appointmentBooked && (
         <div className="fixed bottom-4 right-4 bg-teal-500 text-white p-4 rounded-lg shadow-lg z-50">
           <div className="flex items-center space-x-2">

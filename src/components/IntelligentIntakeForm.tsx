@@ -191,23 +191,23 @@ const IntelligentIntakeForm: React.FC<IntelligentIntakeFormProps> = ({ onSubmit 
   };
 
   return (
-    <section className="py-20 lg:py-32 bg-white" data-section="consultation-form">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white" data-section="consultation-form" id="sectionform">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Form Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center space-x-2 bg-blue-50 rounded-full px-4 py-2 mb-6">
-            <MessageSquare size={16} className="text-blue-600" />
-            <span className="text-sm font-medium text-blue-600">Strategic Consultation Request</span>
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center space-x-2 bg-blue-100/80 rounded-full px-4 py-2 mb-6 shadow-sm">
+            <MessageSquare size={18} className="text-blue-600" />
+            <span className="text-sm font-medium text-blue-700">Strategic Consultation Request</span>
           </div>
           
           {submitSuccess ? (
-            <div className="text-center py-12">
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Check size={40} className="text-green-600" />
+            <div className="text-center py-12 px-6 bg-white rounded-xl shadow-lg max-w-2xl mx-auto">
+              <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-8">
+                <Check size={48} className="text-green-600" />
               </div>
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Thank You!</h2>
-              <p className="text-lg text-gray-600 mb-6">
-                Your consultation request has been submitted successfully. We'll contact you shortly.
+              <p className="text-lg text-gray-600 mb-8">
+                Your consultation request has been submitted successfully. We'll contact you within 24 hours.
               </p>
               <button
                 onClick={() => {
@@ -238,17 +238,17 @@ const IntelligentIntakeForm: React.FC<IntelligentIntakeFormProps> = ({ onSubmit 
                   });
                   setVisitorType('');
                 }}
-                className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300"
+                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg"
               >
                 Submit Another Request
               </button>
             </div>
           ) : (
             <>
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
                 {getStepTitle()}
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 {getStepDescription()}
               </p>
             </>
@@ -258,30 +258,35 @@ const IntelligentIntakeForm: React.FC<IntelligentIntakeFormProps> = ({ onSubmit 
         {!submitSuccess && (
           <>
             {/* Progress Indicator */}
-            <div className="mb-12">
+            <div className="mb-12 px-6">
               <div className="flex items-center justify-between mb-4">
                 {[1, 2, 3, 4].map((step) => (
                   <div key={step} className="flex items-center">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm ${
-                      step <= currentStep ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-400'
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center font-semibold text-sm transition-all duration-300 ${
+                      step <= currentStep ? 'bg-blue-600 text-white shadow-md' : 'bg-gray-100 text-gray-400'
                     }`}>
-                      {step < currentStep ? <Check size={16} className="text-white" /> : step}
+                      {step < currentStep ? <Check size={18} className="text-white" /> : step}
                     </div>
-                    {step < 4 && <div className={`w-full h-1 mx-4 ${step < currentStep ? 'bg-blue-600' : 'bg-gray-100'}`}></div>}
+                    {step < 4 && (
+                      <div className={`w-full h-1 mx-4 transition-all duration-500 ${
+                        step < currentStep ? 'bg-blue-600' : 'bg-gray-100'
+                      }`}></div>
+                    )}
                   </div>
                 ))}
               </div>
               <div className="text-center">
-                <span className="text-sm text-gray-600">Step {currentStep} of 4</span>
+                <span className="text-sm font-medium text-gray-500">Step {currentStep} of 4</span>
               </div>
             </div>
 
             {/* Form Content */}
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-8 bg-white rounded-2xl shadow-xl p-8">
               {/* Step 1: Visitor Type Selection */}
               {currentStep === 1 && (
-                <div className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-4">
+                <div className="space-y-8">
+                  <h3 className="text-xl font-semibold text-gray-800">Select your primary role</h3>
+                  <div className="grid sm:grid-cols-2 gap-6">
                     {visitorTypes.map((type) => {
                       const IconComponent = type.icon;
                       return (
@@ -289,22 +294,24 @@ const IntelligentIntakeForm: React.FC<IntelligentIntakeFormProps> = ({ onSubmit 
                           key={type.id}
                           type="button"
                           onClick={() => handleVisitorTypeSelect(type.id)}
-                          className={`p-6 rounded-xl border-2 text-left transition-all duration-300 hover:shadow-lg ${
-                            visitorType === type.id ? 'border-blue-600 bg-blue-50' : 'border-gray-200 bg-white hover:border-blue-300'
+                          className={`p-6 rounded-xl border-2 text-left transition-all duration-300 hover:shadow-lg hover:border-blue-400 ${
+                            visitorType === type.id 
+                              ? 'border-blue-600 bg-blue-50/50 shadow-md' 
+                              : 'border-gray-200 bg-white'
                           }`}
                         >
                           <div className="flex items-start space-x-4">
-                            <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
+                            <div className={`w-14 h-14 rounded-lg flex items-center justify-center transition-colors ${
                               visitorType === type.id ? 'bg-blue-600' : 'bg-gray-100'
                             }`}>
                               <IconComponent 
-                                size={24} 
+                                size={28} 
                                 className={visitorType === type.id ? 'text-white' : 'text-gray-600'} 
                               />
                             </div>
                             <div className="flex-1">
-                              <h3 className="font-semibold text-gray-900 mb-2">{type.title}</h3>
-                              <p className="text-sm text-gray-600">{type.description}</p>
+                              <h3 className="font-semibold text-lg text-gray-900 mb-2">{type.title}</h3>
+                              <p className="text-gray-600">{type.description}</p>
                             </div>
                           </div>
                         </button>
@@ -316,88 +323,106 @@ const IntelligentIntakeForm: React.FC<IntelligentIntakeFormProps> = ({ onSubmit 
 
               {/* Step 2: Business Context */}
               {currentStep === 2 && (
-                <div className="space-y-6">
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    <input
-                      type="text"
-                      placeholder="Your full name"
-                      value={formData.name}
-                      onChange={(e) => handleInputChange('name', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      required
-                    />
-                    <input
-                      type="email"
-                      placeholder="Business email address"
-                      value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      required
-                    />
-                    <input
-                      type="text"
-                      placeholder="Company name"
-                      value={formData.company}
-                      onChange={(e) => handleInputChange('company', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      required
-                    />
-                    <input
-                      type="text"
-                      placeholder="Your role/title"
-                      value={formData.role}
-                      onChange={(e) => handleInputChange('role', e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      required
-                    />
-                  </div>
-                  
-                  <div className="grid sm:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-900 mb-2">Company Size</label>
-                      <select
-                        value={formData.companySize}
-                        onChange={(e) => handleInputChange('companySize', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        required
-                      >
-                        <option value="">Select company size</option>
-                        <option value="startup">Startup (1-10 employees)</option>
-                        <option value="small">Small (11-50 employees)</option>
-                        <option value="medium">Medium (51-200 employees)</option>
-                        <option value="large">Large (201-1000 employees)</option>
-                        <option value="enterprise">Enterprise (1000+ employees)</option>
-                      </select>
-                    </div>
-                    
-                    <div>
-                      <label className="block text-sm font-medium text-gray-900 mb-2">Industry</label>
-                      <select
-                        value={formData.industry}
-                        onChange={(e) => handleInputChange('industry', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        required
-                      >
-                        <option value="">Select industry</option>
-                        <option value="fintech">FinTech</option>
-                        <option value="healthcare">Healthcare</option>
-                        <option value="ecommerce">E-commerce</option>
-                        <option value="saas">SaaS</option>
-                        <option value="education">Education</option>
-                        <option value="manufacturing">Manufacturing</option>
-                        <option value="other">Other</option>
-                      </select>
+                <div className="space-y-8">
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-800 mb-6">Basic Information</h3>
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                        <input
+                          type="text"
+                          placeholder="John Smith"
+                          value={formData.name}
+                          onChange={(e) => handleInputChange('name', e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Business Email *</label>
+                        <input
+                          type="email"
+                          placeholder="john@company.com"
+                          value={formData.email}
+                          onChange={(e) => handleInputChange('email', e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+                        <input
+                          type="text"
+                          placeholder="Acme Inc."
+                          value={formData.company}
+                          onChange={(e) => handleInputChange('company', e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Your Role *</label>
+                        <input
+                          type="text"
+                          placeholder="CTO, Product Manager, etc."
+                          value={formData.role}
+                          onChange={(e) => handleInputChange('role', e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                          required
+                        />
+                      </div>
                     </div>
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-2">Current Challenges</label>
+                    <h3 className="text-xl font-semibold text-gray-800 mb-6">Company Details</h3>
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Company Size *</label>
+                        <select
+                          value={formData.companySize}
+                          onChange={(e) => handleInputChange('companySize', e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                          required
+                        >
+                          <option value="">Select company size</option>
+                          <option value="startup">Startup (1-10 employees)</option>
+                          <option value="small">Small (11-50 employees)</option>
+                          <option value="medium">Medium (51-200 employees)</option>
+                          <option value="large">Large (201-1000 employees)</option>
+                          <option value="enterprise">Enterprise (1000+ employees)</option>
+                        </select>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Industry *</label>
+                        <select
+                          value={formData.industry}
+                          onChange={(e) => handleInputChange('industry', e.target.value)}
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                          required
+                        >
+                          <option value="">Select industry</option>
+                          <option value="fintech">FinTech</option>
+                          <option value="healthcare">Healthcare</option>
+                          <option value="ecommerce">E-commerce</option>
+                          <option value="saas">SaaS</option>
+                          <option value="education">Education</option>
+                          <option value="manufacturing">Manufacturing</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Current Challenges *</label>
                     <textarea
                       placeholder="Describe your main technology challenges or business objectives..."
                       value={formData.currentChallenges}
                       onChange={(e) => handleInputChange('currentChallenges', e.target.value)}
                       rows={4}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                       required
                     />
                   </div>
@@ -406,22 +431,22 @@ const IntelligentIntakeForm: React.FC<IntelligentIntakeFormProps> = ({ onSubmit 
 
               {/* Step 3: Project Requirements */}
               {currentStep === 3 && (
-                <div className="space-y-6">
+                <div className="space-y-8">
                   <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-3">Project Type</label>
-                    <div className="grid sm:grid-cols-2 gap-3">
+                    <h3 className="text-xl font-semibold text-gray-800 mb-6">Project Type *</h3>
+                    <div className="grid sm:grid-cols-2 gap-4">
                       {projectTypes.map((type) => (
-                        <label key={type} className="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <label key={type} className="flex items-center space-x-4 p-4 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
                           <input
                             type="radio"
                             name="projectType"
                             value={type}
                             checked={formData.projectType === type}
                             onChange={(e) => handleInputChange('projectType', e.target.value)}
-                            className="text-blue-600 focus:ring-blue-500"
+                            className="h-5 w-5 text-blue-600 focus:ring-blue-500"
                             required
                           />
-                          <span className="text-sm text-gray-900">{type}</span>
+                          <span className="text-gray-900">{type}</span>
                         </label>
                       ))}
                     </div>
@@ -429,11 +454,11 @@ const IntelligentIntakeForm: React.FC<IntelligentIntakeFormProps> = ({ onSubmit 
                   
                   <div className="grid sm:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-900 mb-2">Timeline</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Timeline *</label>
                       <select
                         value={formData.timeline}
                         onChange={(e) => handleInputChange('timeline', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                         required
                       >
                         <option value="">Select timeline</option>
@@ -446,11 +471,11 @@ const IntelligentIntakeForm: React.FC<IntelligentIntakeFormProps> = ({ onSubmit 
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-900 mb-2">Budget Range</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Budget Range *</label>
                       <select
                         value={formData.budget}
                         onChange={(e) => handleInputChange('budget', e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                         required
                       >
                         <option value="">Select budget range</option>
@@ -464,17 +489,17 @@ const IntelligentIntakeForm: React.FC<IntelligentIntakeFormProps> = ({ onSubmit 
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-3">Platforms & Technologies</label>
-                    <div className="grid sm:grid-cols-2 gap-3">
+                    <h3 className="text-xl font-semibold text-gray-800 mb-6">Platforms & Technologies</h3>
+                    <div className="grid sm:grid-cols-2 gap-4">
                       {platforms.map((platform) => (
-                        <label key={platform} className="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                        <label key={platform} className="flex items-center space-x-4 p-4 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
                           <input
                             type="checkbox"
                             checked={formData.platforms.includes(platform)}
                             onChange={(e) => handleArrayChange('platforms', platform, e.target.checked)}
-                            className="text-blue-600 focus:ring-blue-500"
+                            className="h-5 w-5 text-blue-600 focus:ring-blue-500"
                           />
-                          <span className="text-sm text-gray-900">{platform}</span>
+                          <span className="text-gray-900">{platform}</span>
                         </label>
                       ))}
                     </div>
@@ -484,38 +509,38 @@ const IntelligentIntakeForm: React.FC<IntelligentIntakeFormProps> = ({ onSubmit 
 
               {/* Step 4: Goals & Success Metrics */}
               {currentStep === 4 && (
-                <div className="space-y-6">
+                <div className="space-y-8">
                   <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-2">Business Goals</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Business Goals *</label>
                     <textarea
                       placeholder="What are your primary business objectives for this project?"
                       value={formData.businessGoals}
                       onChange={(e) => handleInputChange('businessGoals', e.target.value)}
                       rows={4}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                       required
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-2">Success Metrics</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Success Metrics</label>
                     <textarea
                       placeholder="How will you measure the success of this project?"
                       value={formData.successMetrics}
                       onChange={(e) => handleInputChange('successMetrics', e.target.value)}
                       rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-900 mb-2">Additional Information</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Additional Information</label>
                     <textarea
                       placeholder="Any additional context, requirements, or questions?"
                       value={formData.additionalInfo}
                       onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
                       rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     />
                   </div>
                 </div>
@@ -528,9 +553,9 @@ const IntelligentIntakeForm: React.FC<IntelligentIntakeFormProps> = ({ onSubmit 
                     <button
                       type="button"
                       onClick={prevStep}
-                      className="text-gray-600 border border-gray-300 px-4 py-2 rounded-lg font-medium hover:bg-gray-50 transition-colors duration-300 flex items-center space-x-2"
+                      className="text-gray-700 border border-gray-300 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-all duration-300 flex items-center space-x-2 shadow-sm hover:shadow-md"
                     >
-                      <ArrowLeft size={16} />
+                      <ArrowLeft size={18} />
                       <span>Previous</span>
                     </button>
                   )}
@@ -542,18 +567,18 @@ const IntelligentIntakeForm: React.FC<IntelligentIntakeFormProps> = ({ onSubmit 
                       type="button"
                       onClick={nextStep}
                       disabled={currentStep === 1 && !visitorType}
-                      className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-300 flex items-center space-x-2"
+                      className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all duration-300 flex items-center space-x-2 shadow-md hover:shadow-lg"
                     >
                       <span>Continue</span>
-                      <ArrowRight size={16} />
+                      <ArrowRight size={18} />
                     </button>
                   ) : (
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors duration-300 flex items-center space-x-2"
+                      className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all duration-300 flex items-center space-x-2 shadow-md hover:shadow-lg"
                     >
-                      <Send size={16} />
+                      <Send size={18} />
                       <span>{isSubmitting ? 'Sending...' : 'Request Consultation'}</span>
                     </button>
                   )}
@@ -561,8 +586,9 @@ const IntelligentIntakeForm: React.FC<IntelligentIntakeFormProps> = ({ onSubmit 
               </div>
 
               {submitError && (
-                <div className="text-red-500 text-center mt-4">
-                  {submitError}
+                <div className="mt-6 p-4 bg-red-50 rounded-lg border border-red-200 text-red-600">
+                  <div className="font-medium">Submission Error</div>
+                  <p>{submitError}</p>
                 </div>
               )}
             </form>
