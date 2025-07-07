@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
-// import Portfolio from '../components/Portfolio';
 import About from '../components/About';
 import Testimonials from '../components/Testimonials';
 import Contact from '../components/Contact';
@@ -9,6 +8,8 @@ import DigitalMarketingPopup from '../components/DigitalMarketingPopup';
 import DigitalMarketingHighlight from '../components/DigitalMarketingHighlight';
 import DigitalMarketingFloatingButton from '../components/DigitalMarketingFloatingButton';
 import DigitalMarketingSection from '../components/DigitalMarketingSection';
+import WhatsAppFloatingButton from '../components/WhatsAppFloatingButton';
+  // Add this import
 
 interface HomeProps {
   onNavigateToConsultation: () => void;
@@ -36,25 +37,17 @@ const Home: React.FC<HomeProps> = ({ onNavigateToConsultation, onNavigateToSched
     <>
       <Hero onNavigateToConsultation={onNavigateToConsultation} />
       <Services onNavigateToConsultation={onNavigateToConsultation} />
-
-      {/* Show highlight section if popup was dismissed or user has seen it before */}
-      {/* {showHighlight && ( */}
       <DigitalMarketingHighlight onNavigateToConsultation={onNavigateToConsultation} />
-      {/* )} */}
       <DigitalMarketingSection onNavigateToConsultation={onNavigateToConsultation} />
-      {/* <Portfolio /> */}
       <About />
-      {/* Pass the handler to Testimonials */}
       <Testimonials onNavigateToScheduling={onNavigateToScheduling} />
-      {/* <Contact /> */}
-
-      {/* Popup component */}
-      {/* <DigitalMarketingPopup onDismiss={handlePopupDismissed} /> */}
-
-      {/* Floating Button - shows after popup is dismissed */}
+      
       <DigitalMarketingFloatingButton 
         onNavigateToConsultation={onNavigateToConsultation}
       />
+      
+      {/* Add the WhatsApp floating button */}
+      <WhatsAppFloatingButton />
     </>
   );
 };
