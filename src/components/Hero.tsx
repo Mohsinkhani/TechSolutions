@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ArrowRight, Play, Star, Globe, Smartphone, BarChart2, Zap, Code, Server, Clock, Activity } from 'lucide-react';
+import { ArrowRight, Play, Star, Globe, Smartphone, BarChart2, Zap, Code, Server, Clock, Activity, CheckCircle, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface HeroProps {
@@ -276,7 +276,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigateToConsultation }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="flex flex-col sm:flex-row gap-6 mb-14"
+              className="flex flex-col sm:flex-row gap-6 mb-8"
             >
               <button 
                 onClick={handleGetStarted}
@@ -292,13 +292,48 @@ const Hero: React.FC<HeroProps> = ({ onNavigateToConsultation }) => {
                 />
                 <ArrowRight className="w-5 h-5 ml-2" />
               </button>
+              
+              <button 
+                onClick={() => window.location.href = '/portfolio'}
+                className="border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-gray-900 px-8 py-4 rounded-full font-semibold flex items-center justify-center transition-all duration-300 transform hover:scale-105 font-mono"
+              >
+                <TypewriterEffect
+                  text="View Our Work"
+                  speed={30}
+                  delay={typingComplete ? 0 : 1500}
+                  cursorColor="#ffffff"
+                  cursorBlinking={false}
+                />
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </button>
+            </motion.div>
+
+            {/* Trust Indicators */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-14 text-sm text-gray-300 font-mono"
+            >
+              <div className="flex items-center space-x-2">
+                <CheckCircle className="w-4 h-4 text-green-400" />
+                <span>Free Consultation</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Shield className="w-4 h-4 text-blue-400" />
+                <span>100% Satisfaction Guarantee</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Clock className="w-4 h-4 text-purple-400" />
+                <span>24hr Response Time</span>
+              </div>
             </motion.div>
 
             {/* Stats */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.9, duration: 0.5 }}
+              transition={{ delay: 1.0, duration: 0.5 }}
               className="grid grid-cols-3 gap-10"
             >
               {[
