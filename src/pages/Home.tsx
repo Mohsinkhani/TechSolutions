@@ -9,14 +9,13 @@ import DigitalMarketingHighlight from '../components/DigitalMarketingHighlight';
 import DigitalMarketingFloatingButton from '../components/DigitalMarketingFloatingButton';
 import DigitalMarketingSection from '../components/DigitalMarketingSection';
 import WhatsAppFloatingButton from '../components/WhatsAppFloatingButton';
-  // Add this import
+import PortfolioShowcase from '../components/PortfolioShowcase';
+import WhyChooseUs from '../components/WhyChooseUs';
+import TrustSignals from '../components/TrustSignals';
 
 interface HomeProps {
   onNavigateToConsultation: () => void;
   onNavigateToScheduling: () => void;
-}
-interface DigitalMarketingSectionProps {
-  onNavigateToConsultation: () => void;
 }
 
 const Home: React.FC<HomeProps> = ({ onNavigateToConsultation, onNavigateToScheduling }) => {
@@ -36,7 +35,10 @@ const Home: React.FC<HomeProps> = ({ onNavigateToConsultation, onNavigateToSched
   return (
     <>
       <Hero onNavigateToConsultation={onNavigateToConsultation} />
+      <TrustSignals />
       <Services onNavigateToConsultation={onNavigateToConsultation} />
+      <PortfolioShowcase onNavigateToConsultation={onNavigateToConsultation} />
+      <WhyChooseUs onNavigateToConsultation={onNavigateToConsultation} />
       <DigitalMarketingHighlight onNavigateToConsultation={onNavigateToConsultation} />
       <DigitalMarketingSection onNavigateToConsultation={onNavigateToConsultation} />
       <About />
@@ -46,7 +48,6 @@ const Home: React.FC<HomeProps> = ({ onNavigateToConsultation, onNavigateToSched
         onNavigateToConsultation={onNavigateToConsultation}
       />
       
-      {/* Add the WhatsApp floating button */}
       <WhatsAppFloatingButton />
     </>
   );
