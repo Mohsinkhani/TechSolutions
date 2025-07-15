@@ -25,6 +25,11 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleNavigateToServices = () => {
+    setCurrentPage('software-development');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleNavigateToAbout = () => {
     setCurrentPage('about');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -37,6 +42,11 @@ function App() {
 
   const handleNavigateToContact = () => {
     setCurrentPage('contact');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavigateToHome = () => {
+    setCurrentPage('home');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -59,38 +69,47 @@ function App() {
           <Home
             onNavigateToConsultation={handleNavigateToConsultation}
             onNavigateToScheduling={handleNavigateToScheduling}
+            onNavigateToPortfolio={handleNavigateToPortfolio}
+            onNavigateToServices={handleNavigateToServices}
+            onNavigateToAbout={handleNavigateToAbout}
+            onNavigateToContact={handleNavigateToContact}
           />
         );
       case 'software-development':
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         return <SoftwareDevelopment />;
       case 'ecommerce-development':
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         return <EcommerceDevelopment />;
       case 'portfolio':
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         return <Portfolio initialFilter={portfolioFilter} />;
       case 'case-study':
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         return <CaseStudy />;
       case 'about':
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         return <About />;
       case 'contact':
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         return <Contact />;
       case 'consultation':
-        window.scrollTo({ top: 0, behavior: 'smooth' });
         return <Consultation />;
       default:
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return <Home onNavigateToConsultation={handleNavigateToConsultation} onNavigateToScheduling={handleNavigateToScheduling} />;
+        return (
+          <Home 
+            onNavigateToConsultation={handleNavigateToConsultation} 
+            onNavigateToScheduling={handleNavigateToScheduling}
+            onNavigateToPortfolio={handleNavigateToPortfolio}
+            onNavigateToServices={handleNavigateToServices}
+            onNavigateToAbout={handleNavigateToAbout}
+            onNavigateToContact={handleNavigateToContact}
+          />
+        );
     }
   };
 
   return (
     <div className="min-h-screen bg-white">
-      <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <Header 
+        currentPage={currentPage} 
+        setCurrentPage={setCurrentPage}
+        onNavigateToHome={handleNavigateToHome}
+      />
       {renderPage()}
       <Footer
         onNavigateToPortfolio={handleNavigateToPortfolio}

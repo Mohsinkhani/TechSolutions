@@ -4,9 +4,10 @@ import { Zap, ChevronDown, Menu, X } from 'lucide-react';
 interface HeaderProps {
   currentPage: string;
   setCurrentPage: (page: string) => void;
+  onNavigateToHome?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
+const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, onNavigateToHome }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
@@ -17,23 +18,28 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
     { name: 'API Development', id: 'api-development' },
     { name: 'Cloud Solutions', id: 'cloud-solutions' },
     { name: 'Database Solutions', id: 'database-solutions' },
-     { name: 'Custom Ecommerce', id: 'custom-ecommerce' },
-      { name: 'Payment Integration', id: 'payment-integration' },
+    { name: 'Custom Ecommerce', id: 'custom-ecommerce' },
+    { name: 'Payment Integration', id: 'payment-integration' },
     { name: 'Marketplace Development', id: 'marketplace' }
   ];
 
-  // const ecommerceServices = [
-  //   { name: 'Shopify Development', id: 'shopify' },
-  //   { name: 'WooCommerce', id: 'woocommerce' },
-  //   { name: 'Magento', id: 'magento' },
-   
-   
-  // ];
-
   const handleNavClick = (page: string) => {
-    setCurrentPage(page);
+    if (page === 'home' && onNavigateToHome) {
+      onNavigateToHome();
+    } else {
+      setCurrentPage(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
+  };
+
+  const handleLogoClick = () => {
+    if (onNavigateToHome) {
+      onNavigateToHome();
+    } else {
+      handleNavClick('home');
+    }
   };
 
   return (
@@ -45,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex items-center cursor-pointer" onClick={() => handleNavClick('home')}>
+            <div className="flex items-center cursor-pointer" onClick={handleLogoClick}>
               <div className="w-8 h-8 bg-teal-500 rounded-lg flex items-center justify-center mr-3">
                 <Zap className="w-5 h-5 text-white" />
               </div>
@@ -64,78 +70,13 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
               </button>
               
               <div className="relative group">
-             <div className="relative group">
-  <button
-    className="text-gray-700 hover:text-teal-600 px-3 py-2 text-sm font-medium flex items-center transition-colors"
-    onClick={() => handleNavClick('software-development')}
-    // Remove onMouseEnter/onMouseLeave for click navigation
-  >
-    Our Services
-    {/* <ChevronDown className="w-4 h-4 ml-1" /> */}
-  </button>
-</div>
-                <div 
-                  className={`absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-lg transition-all duration-200 ${
-                    activeDropdown === 'software' ? 'opacity-100 visible' : 'opacity-0 invisible'
-                  }`}
-                  onMouseEnter={() => setActiveDropdown('software')}
-                  onMouseLeave={() => setActiveDropdown(null)}
-                >
-                  <div className="py-2">
-                    <button 
-                      onClick={() => handleNavClick('software-development')}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-teal-50 hover:text-teal-600"
-                    >
-                     Our Services
-                    </button>
-                    {softwareServices.map((service) => (
-                      <button 
-                        key={service.id}
-                        onClick={() => handleNavClick('software-development')}
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-teal-50 hover:text-teal-600"
-                      >
-                        {service.name}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              
-              {/* <div className="relative group">
-                <button 
+                <button
                   className="text-gray-700 hover:text-teal-600 px-3 py-2 text-sm font-medium flex items-center transition-colors"
-                  onMouseEnter={() => setActiveDropdown('ecommerce')}
-                  onMouseLeave={() => setActiveDropdown(null)}
+                  onClick={() => handleNavClick('software-development')}
                 >
-                  Ecommerce Development
-                  <ChevronDown className="w-4 h-4 ml-1" />
+                  Our Services
                 </button>
-                <div 
-                  className={`absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-lg transition-all duration-200 ${
-                    activeDropdown === 'ecommerce' ? 'opacity-100 visible' : 'opacity-0 invisible'
-                  }`}
-                  onMouseEnter={() => setActiveDropdown('ecommerce')}
-                  onMouseLeave={() => setActiveDropdown(null)}
-                >
-                  <div className="py-2">
-                    <button 
-                      onClick={() => handleNavClick('ecommerce-development')}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-teal-50 hover:text-teal-600"
-                    >
-                      All Ecommerce Services
-                    </button>
-                    {ecommerceServices.map((service) => (
-                      <button 
-                        key={service.id}
-                        onClick={() => handleNavClick('ecommerce-development')}
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-teal-50 hover:text-teal-600"
-                      >
-                        {service.name}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div> */}
+              </div>
               
               <button 
                 onClick={() => handleNavClick('portfolio')}
@@ -207,12 +148,6 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
               >
                 Our Services
               </button>
-              {/* <button 
-                onClick={() => handleNavClick('ecommerce-development')}
-                className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-gray-50 rounded-md"
-              >
-                Ecommerce Development
-              </button> */}
               <button 
                 onClick={() => handleNavClick('portfolio')}
                 className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-gray-50 rounded-md"

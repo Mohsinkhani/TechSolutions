@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 
 interface HeroProps {
   onNavigateToConsultation: () => void;
+  onNavigateToPortfolio?: () => void;
 }
 
 interface TypewriterEffectProps {
@@ -89,7 +90,7 @@ const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
   );
 };
 
-const Hero: React.FC<HeroProps> = ({ onNavigateToConsultation }) => {
+const Hero: React.FC<HeroProps> = ({ onNavigateToConsultation, onNavigateToPortfolio }) => {
   const [windowHeight, setWindowHeight] = useState(0);
   const [typingComplete, setTypingComplete] = useState(false);
 
@@ -114,6 +115,18 @@ const Hero: React.FC<HeroProps> = ({ onNavigateToConsultation }) => {
         sectionform.scrollIntoView({ behavior: 'smooth' });
       }
     }, 500);
+  };
+
+  const handleViewWork = () => {
+    if (onNavigateToPortfolio) {
+      onNavigateToPortfolio();
+    } else {
+      // Fallback: scroll to portfolio section on the same page
+      const portfolioSection = document.getElementById('portfolio');
+      if (portfolioSection) {
+        portfolioSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   // Generate unique keys for raindrops to prevent re-render issues
@@ -294,7 +307,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigateToConsultation }) => {
               </button>
               
               <button 
-                onClick={() => window.location.href = '/portfolio'}
+                onClick={handleViewWork}
                 className="border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-gray-900 px-8 py-4 rounded-full font-semibold flex items-center justify-center transition-all duration-300 transform hover:scale-105 font-mono"
               >
                 <TypewriterEffect
@@ -418,9 +431,9 @@ const Hero: React.FC<HeroProps> = ({ onNavigateToConsultation }) => {
                               <div className={`absolute -inset-1.5 bg-${service.color}-500/20 rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
                               <service.icon className="w-7 h-7 group-hover:scale-110 group-hover:rotate-12 transition-transform" />
                             </div>
-                          <span className={`text-xl font-medium text-green-400 group-hover:text-${service.color}-300 transition-colors font-mono`}>
-  {service.title}
-</span>
+                            <span className={`text-xl font-medium text-green-400 group-hover:text-${service.color}-300 transition-colors font-mono`}>
+                              {service.title}
+                            </span>
                           </div>
                           <div className={`absolute inset-0 rounded-xl bg-gradient-to-br from-${service.color}-500/10 to-${service.color}-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
                           <div className={`absolute bottom-0 left-1/2 w-0 h-1 bg-${service.color}-400 group-hover:w-4/5 group-hover:left-[10%] transition-all duration-500`}></div>
