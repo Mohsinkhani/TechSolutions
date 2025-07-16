@@ -4,12 +4,56 @@ import { motion } from 'framer-motion';
 
 const TrustSignals: React.FC = () => {
   const clientLogos = [
-    { name: 'Exchange App', logo: 'https://via.placeholder.com/120x60/1E3A8A/FFFFFF?text=Exchange' },
-    { name: 'Mobile Palace', logo: 'https://via.placeholder.com/120x60/10B981/FFFFFF?text=Mobile+Palace' },
-    { name: 'Awami Labs', logo: 'https://via.placeholder.com/120x60/3B82F6/FFFFFF?text=Awami+Labs' },
-    { name: 'Saudi PS', logo: 'https://via.placeholder.com/120x60/D97706/FFFFFF?text=Saudi+PS' },
-    { name: 'Solar Solutions', logo: 'https://via.placeholder.com/120x60/7C3AED/FFFFFF?text=Solar' },
-    { name: 'KIU University', logo: 'https://via.placeholder.com/120x60/DC2626/FFFFFF?text=KIU' }
+    { 
+      name: 'Microsoft', 
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/200px-Microsoft_logo.svg.png',
+      width: '120px'
+    },
+    { 
+      name: 'Google', 
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/200px-Google_2015_logo.svg.png',
+      width: '100px'
+    },
+    { 
+      name: 'Amazon', 
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/200px-Amazon_logo.svg.png',
+      width: '100px'
+    },
+    { 
+      name: 'Apple', 
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/80px-Apple_logo_black.svg.png',
+      width: '40px'
+    },
+    { 
+      name: 'Meta', 
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Meta_Platforms_Inc._logo.svg/200px-Meta_Platforms_Inc._logo.svg.png',
+      width: '120px'
+    },
+    { 
+      name: 'Netflix', 
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/200px-Netflix_2015_logo.svg.png',
+      width: '100px'
+    },
+    { 
+      name: 'Spotify', 
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/80px-Spotify_logo_without_text.svg.png',
+      width: '40px'
+    },
+    { 
+      name: 'Uber', 
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Uber_logo_2018.png/200px-Uber_logo_2018.png',
+      width: '80px'
+    },
+    { 
+      name: 'Airbnb', 
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_Bélo.svg/80px-Airbnb_Logo_Bélo.svg.png',
+      width: '40px'
+    },
+    { 
+      name: 'Tesla', 
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Tesla_T_symbol.svg/80px-Tesla_T_symbol.svg.png',
+      width: '40px'
+    }
   ];
 
   const trustMetrics = [
@@ -73,28 +117,56 @@ const TrustSignals: React.FC = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center text-gray-600 mb-8 font-medium"
+            className="text-center text-gray-600 mb-8 font-medium text-lg"
           >
             Trusted by 500+ businesses worldwide
           </motion.p>
           
-          <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-            {clientLogos.map((client, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="grayscale hover:grayscale-0 transition-all duration-300"
-              >
-                <img
-                  src={client.logo}
-                  alt={client.name}
-                  className="h-8 w-auto object-contain"
-                />
-              </motion.div>
-            ))}
+          {/* Scrolling Logo Container */}
+          <div className="relative overflow-hidden">
+            <div className="flex animate-scroll space-x-12 items-center">
+              {/* First set of logos */}
+              {clientLogos.map((client, index) => (
+                <motion.div
+                  key={`first-${index}`}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110"
+                >
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    style={{ width: client.width, height: 'auto' }}
+                    className="object-contain max-h-12"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                    }}
+                  />
+                </motion.div>
+              ))}
+              
+              {/* Duplicate set for seamless scrolling */}
+              {clientLogos.map((client, index) => (
+                <motion.div
+                  key={`second-${index}`}
+                  className="flex-shrink-0 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110"
+                >
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    style={{ width: client.width, height: 'auto' }}
+                    className="object-contain max-h-12"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                    }}
+                  />
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -108,7 +180,7 @@ const TrustSignals: React.FC = () => {
           {certifications.map((cert, index) => (
             <div
               key={index}
-              className="flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200"
+              className="flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300"
             >
               <Shield className="w-4 h-4 text-green-600" />
               <span className="text-sm font-medium text-gray-700">{cert}</span>
@@ -116,6 +188,25 @@ const TrustSignals: React.FC = () => {
           ))}
         </motion.div>
       </div>
+
+      <style>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .animate-scroll {
+          animation: scroll 30s linear infinite;
+        }
+        
+        .animate-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
 };
