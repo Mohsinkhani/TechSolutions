@@ -18,18 +18,9 @@ const DigitalMarketingHighlight: React.FC<DigitalMarketingHighlightProps> = ({ o
     
     // Small delay to ensure page navigation completes, then scroll to the form
     setTimeout(() => {
-      const formSection = document.querySelector('[data-section="consultation-form"]');
+      const formSection = document.getElementById('sectionform');
       if (formSection) {
         formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        // Fallback: scroll to the consultation form by looking for the form title
-        const formTitle = Array.from(document.querySelectorAll('h2')).find(h => 
-          h.textContent?.includes('Tell us about yourself') || 
-          h.textContent?.includes('Strategic Consultation Request')
-        );
-        if (formTitle) {
-          formTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
       }
     }, 500);
   };

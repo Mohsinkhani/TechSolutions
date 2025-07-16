@@ -98,7 +98,11 @@ const Home: React.FC<HomeProps> = ({
       <TrustSignals />
       
       <div id="services">
-        <Services onNavigateToConsultation={onNavigateToConsultation} />
+        <Services 
+          onNavigateToConsultation={onNavigateToConsultation}
+          onNavigateToPortfolio={handleNavigateToPortfolio}
+          onNavigateToContact={handleNavigateToContact}
+        />
       </div>
       
       <div id="portfolio">

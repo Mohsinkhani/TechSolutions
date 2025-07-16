@@ -127,9 +127,12 @@ const Testimonials: React.FC<TestimonialsProps> = ({ onNavigateToScheduling }) =
               Let's discuss how we can help transform your business with our proven solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {/* <button className="bg-white text-teal-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold transition-colors duration-300">
-                Start Your Project
-              </button> */}
+              <button 
+                className="bg-white text-teal-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold transition-colors duration-300"
+                onClick={onNavigateToScheduling}
+              >
+                Get Free Quote
+              </button>
              <button
               className="border-2 border-white text-white hover:bg-white hover:text-teal-600 px-8 py-4 rounded-full font-semibold transition-all duration-300"
               onClick={onNavigateToScheduling}

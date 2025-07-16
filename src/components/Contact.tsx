@@ -133,8 +133,8 @@ const Contact = () => {
             </h1>
             <p className="text-xl text-gray-200 mb-8 leading-relaxed max-w-3xl mx-auto">
               Ready to start your next project? Contact us today for a free consultation and let's discuss how we can help transform your business with innovative digital solutions.
-            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <ArrowRight size={20} className="ml-2" />
               <button className="bg-white text-teal-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold transition-colors duration-300 flex items-center justify-center">
                 <Calendar className="w-5 h-5 mr-2" />
                 Schedule Free Consultation

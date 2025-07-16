@@ -204,7 +204,7 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ onNavigateToConsultation }) =
                 onClick={onNavigateToConsultation}
                 className="w-full bg-gradient-to-r from-teal-600 to-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:from-teal-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
-                Get Your Free Quote Now
+                Schedule Free Consultation
               </button>
               
               <p className="text-sm text-gray-500">

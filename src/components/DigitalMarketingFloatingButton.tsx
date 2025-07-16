@@ -38,14 +38,6 @@ const DigitalMarketingFloatingButton: React.FC<DigitalMarketingFloatingButtonPro
       const formSection = document.getElementById('sectionform');
       if (formSection) {
         formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        const formTitle = Array.from(document.querySelectorAll('h2')).find(h => 
-          h.textContent?.includes('Tell us about yourself') || 
-          h.textContent?.includes('Strategic Consultation Request')
-        );
-        if (formTitle) {
-          formTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
       }
     }, 500);
   };

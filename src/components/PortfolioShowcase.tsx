@@ -200,7 +200,7 @@ const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({ onNavigateToConsu
               onClick={onNavigateToConsultation}
               className="bg-white text-teal-600 hover:bg-gray-100 px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
-              Get Your Free Quote
+              Schedule Consultation
             </button>
             <button
               onClick={() => window.location.href = '/portfolio'}

@@ -4,22 +4,34 @@ import { useNavigate } from 'react-router-dom';
 
 interface ServicesProps {
   onNavigateToConsultation: () => void;
+  onNavigateToPortfolio?: () => void;
+  onNavigateToContact?: () => void;
 }
 
-const Services: React.FC<ServicesProps> = ({ onNavigateToConsultation }) => {
+const Services: React.FC<ServicesProps> = ({ onNavigateToConsultation, onNavigateToPortfolio, onNavigateToContact }) => {
   const [hoveredService, setHoveredService] = useState<string | null>(null);
-  const navigate = useNavigate();
 
   const handleLearnMore = () => {
     onNavigateToConsultation();
     setTimeout(() => {
-      const formSection = document.querySelector('[data-section="consultation-form"]');
+      const formSection = document.getElementById('sectionform');
       if (formSection) {
         formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, 500);
   };
 
+  const handleViewPortfolio = () => {
+    if (onNavigateToPortfolio) {
+      onNavigateToPortfolio();
+    }
+  };
+
+  const handleGetQuote = () => {
+    if (onNavigateToContact) {
+      onNavigateToContact();
+    }
+  };
   const services = [
     {
       id: 'web-development',
@@ -278,11 +290,11 @@ const Services: React.FC<ServicesProps> = ({ onNavigateToConsultation }) => {
                 Schedule Consultation
               </button>
               <button 
-                onClick={() => navigate('/portfolio')}
+                onClick={handleViewPortfolio}
                 className="border-2 border-gray-300 hover:border-blue-500 bg-white/80 hover:bg-blue-50/50 text-gray-700 hover:text-blue-600 px-8 py-3 rounded-full font-semibold transition-all duration-300 flex items-center justify-center shadow-sm hover:shadow-md"
               >
-                <Code size={20} className="mr-2" />
                 View Portfolio
+                <ArrowRight size={20} className="ml-2" />
               </button>
             </div>
           </div>
