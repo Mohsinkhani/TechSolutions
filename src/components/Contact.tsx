@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
+import { saveContactRequest } from '../utils/storage';
 import Button from './ui/Button';
 
 export const Contact: React.FC = () => {
@@ -26,8 +27,11 @@ export const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form submitted:', formData);
+    
+    // Save the request to local storage
+    const savedRequest = saveContactRequest(formData);
+    console.log('Request saved:', savedRequest);
+    
     setIsSubmitted(true);
     
     // Reset form after 3 seconds

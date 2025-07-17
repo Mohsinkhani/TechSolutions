@@ -120,6 +120,18 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, onNavigate
               >
                 Contact Us
               </button>
+              <button 
+                onClick={() => handleNavClick('admin-requests')}
+                className="w-full bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-full text-sm font-medium transition-colors"
+              >
+                Admin
+              </button>
+              <button 
+                onClick={() => handleNavClick('admin-requests')}
+                className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-full text-sm font-medium transition-colors"
+              >
+                Admin
+              </button>
             </div>
 
             {/* Mobile menu button */}

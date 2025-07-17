@@ -8,6 +8,7 @@ import CaseStudy from './pages/CaseStudy';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Consultation from './pages/Consultation';
+import AdminRequests from './pages/AdminRequests';
 import Footer from './components/Footer';
 
 function App() {
@@ -89,6 +90,8 @@ function App() {
         return <Contact />;
       case 'consultation':
         return <Consultation />;
+      case 'admin-requests':
+        return <AdminRequests />;
       default:
         return (
           <Home 
