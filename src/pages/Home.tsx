@@ -3,7 +3,7 @@ import Hero from '../components/Hero';
 import Services from '../components/Services';
 import About from '../components/About';
 import Testimonials from '../components/Testimonials';
-import Contact from '../components/Contact';
+import { Contact } from '../components/Contact';
 import DigitalMarketingPopup from '../components/DigitalMarketingPopup';
 import DigitalMarketingHighlight from '../components/DigitalMarketingHighlight';
 import DigitalMarketingFloatingButton from '../components/DigitalMarketingFloatingButton';
