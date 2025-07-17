@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
-import { Button } from './ui/Button';
+import Button from './ui/Button';
 
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
