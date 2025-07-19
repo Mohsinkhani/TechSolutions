@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 
 interface PortfolioShowcaseProps {
   onNavigateToConsultation: () => void;
+  onNavigateToPortfolio?: () => void;
 }
 
 const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({ onNavigateToConsultation }) => {
@@ -203,7 +204,7 @@ const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({ onNavigateToConsu
               Schedule Consultation
             </button>
             <button
-              onClick={() => window.location.href = '/portfolio'}
+              onClick={() => onNavigateToPortfolio && onNavigateToPortfolio()}
               className="border-2 border-white text-white hover:bg-white hover:text-teal-600 px-8 py-4 rounded-full font-semibold transition-all duration-300"
             >
               View All Projects

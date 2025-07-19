@@ -32,6 +32,18 @@ const Home: React.FC<HomeProps> = ({
 }) => {
   const [showHighlight, setShowHighlight] = useState(false);
 
+  // Listen for portfolio navigation events
+  React.useEffect(() => {
+    const handlePortfolioNavigation = () => {
+      if (onNavigateToPortfolio) {
+        onNavigateToPortfolio();
+      }
+    };
+
+    window.addEventListener('navigate-to-portfolio', handlePortfolioNavigation);
+    return () => window.removeEventListener('navigate-to-portfolio', handlePortfolioNavigation);
+  }, [onNavigateToPortfolio]);
+
   React.useEffect(() => {
     const hasSeenPopup = localStorage.getItem('hasSeenDigitalMarketingPopup');
     if (hasSeenPopup) {
@@ -106,7 +118,10 @@ const Home: React.FC<HomeProps> = ({
       </div>
       
       <div id="portfolio">
-        <PortfolioShowcase onNavigateToConsultation={onNavigateToConsultation} />
+        <PortfolioShowcase 
+          onNavigateToConsultation={onNavigateToConsultation}
+          onNavigateToPortfolio={handleNavigateToPortfolio}
+        />
       </div>
       
       <WhyChooseUs onNavigateToConsultation={onNavigateToConsultation} />
